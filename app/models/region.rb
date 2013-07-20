@@ -11,7 +11,7 @@ class Region < ActiveRecord::Base
 		 
 		artists.each do |artist|
 			a = Artist.find_or_create_by_name(artist['name'])
-			a.hotness = artist['hotttnesss'].to_i
+			a.hotness = artist['hotttnesss']
 			a.region_id = self.id
 			a.save
 
