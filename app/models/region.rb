@@ -18,6 +18,7 @@ class Region < ActiveRecord::Base
 			artist['genres'].each do |genre|
 				g = Genre.find_or_create_by_name(genre['name'])
 				g.artist_id = a.id
+				g.save
 			end
 
 		end

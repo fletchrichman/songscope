@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="span10 offset4">
+		<h2> <%= @region.name %> </h2>
+		<table class="table table-bordered" id="artists">
+			<th>Rank</th>
+			<th>Name</th>
+			<th>Genres</th>
+			<% @artists.each_with_index do |artist, index| %>
+				<tr>
+					<td><%= index +1 %></td>
+					<td><%= artist.name %></td>
+					<td>
+						<% artist.genres.each do |genre| %>
+							<%= genre.name %>, 
+						<% end %> 
+					</td>	
+					<!-- <td><%= artist.hotness %></td> -->
+			<% end %>
+		</table>
+	</div>
+</div>
