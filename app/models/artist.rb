@@ -5,6 +5,7 @@ class Artist < ActiveRecord::Base
 
 	belongs_to :region
 	has_many :genres
+	has_many :songs
 
 	def find_song
 		# search through soundcloud for that artists song

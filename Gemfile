@@ -7,7 +7,7 @@ gem 'echonest-ruby-api'
 gem 'soundcloud'
 gem 'sqlite3'
 gem 'httparty'
-gem 'rdio'
+#gem 'rdio'
 
 # Gems used only for assets and not required
 # in production environments by default.
