@@ -13,6 +13,8 @@ class Region < ActiveRecord::Base
 			a = Artist.find_or_create_by_name(artist['name'])
 			a.hotness = artist['hotttnesss']
 			a.region_id = self.id
+			artist["foreign_ids"].first["foreign_id"].slice!("rdio-US:artist:")
+			a.song_url = artist["foreign_ids"].first["foreign_id"]
 			a.save
 
 			artist['genres'].each do |genre|
@@ -28,7 +30,7 @@ class Region < ActiveRecord::Base
 
 
  	def GET_location_hot
-		HTTParty.get("http://developer.echonest.com/api/v4/artist/search?api_key=#{ENV['ECHONEST_KEY']}&format=json&artist_location=region:#{self.name}&limit=false&results=100&sort=hotttnesss-desc&bucket=genre&bucket=hotttnesss")
+		HTTParty.get("http://developer.echonest.com/api/v4/artist/search?api_key=#{ENV['ECHONEST_KEY']}&format=json&artist_location=region:#{self.name}&limit=false&results=100&sort=hotttnesss-desc&bucket=genre&bucket=hotttnesss&bucket=id:rdio-US")
  	end
 
 end
