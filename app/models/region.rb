@@ -30,7 +30,7 @@ class Region < ActiveRecord::Base
 
 
  	def GET_location_hot
-		HTTParty.get("http://developer.echonest.com/api/v4/artist/search?api_key=#{ENV['ECHONEST_KEY']}&format=json&artist_location=region:#{self.name}&limit=false&results=100&sort=hotttnesss-desc&bucket=genre&bucket=hotttnesss&bucket=id:rdio-US")
+		HTTParty.get("http://developer.echonest.com/api/v4/artist/search?api_key=#{ENV['ECHONEST_KEY']}&format=json&artist_location=region:#{URI.encode( self.name )}&limit=true&results=100&sort=hotttnesss-desc&bucket=genre&bucket=hotttnesss&bucket=id:rdio-US")
  	end
 
 end
