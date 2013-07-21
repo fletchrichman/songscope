@@ -7,6 +7,9 @@ gem 'echonest-ruby-api'
 gem 'soundcloud'
 gem 'sqlite3'
 gem 'httparty'
+gem 'simple_form'
+gem 'alchemy-api-rb', :require => 'alchemy_api'
+
 #gem 'rdio'
 
 # Gems used only for assets and not required
@@ -25,6 +28,7 @@ end
 group :development do 
 	gem 'pry'
 	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 gem 'jquery-rails'

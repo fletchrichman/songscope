@@ -1,23 +1,45 @@
-<div class="row">
-	<div class="span10 offset4">
-		<h2> <%= @region.name %> </h2>
-		<table class="table table-bordered" id="artists">
-			<th>Rank</th>
-			<th>Name</th>
-			<th>Genres</th>
-			<% @artists.each_with_index do |artist, index| %>
-				<tr>
-					<td><%= index +1 %></td>
-					<td><%= artist.name %></td>
-					<td>
-						<% artist.genres.each do |genre| %>
-							<%= genre.name %>, 
-						<% end %> 
-					</td>	
-					<!-- <td><%= artist.hotness %></td> -->
-			<% end %>
-		</table>
+<div class="table-artists">
+	<div class="artist">
+		<div class="row">
+			<h2> <%= @region.name %> </h2>
+			<div class="span1"><strong></strong></div>
+			<div class="span1"><strong>Rank</strong></div>
+			<div class="span2"><strong>Name</strong></div>
+			<div class="span5"><strong>Genres</strong></div>
+		</div>
 	</div>
+		<% @artists.each_with_index do |artist, index| %>
+			<div class="artist">
+				<div class="row">
+						<div class="span1">
+							<% if artist.song %>
+								<button type="button" id="play<%= index + 1 %>" onclick="play_song(<%=index+ 1%>)" class="btn btn-small" data-rdio="<%= artist.song.rdio_id %>" data-toggle="collapse" data-target=<%="#song#{index+1}"%> ><i class="icon-play"></i></button> 
+							<% end %>
+						</div>
+						<div class="span1"><%= index + 1 %></div>
+						<div class="span2"><%= artist.name	%></div>
+						<div class="span5">
+							<% genres = "" %>
+							<% artist.artist_genres.each do |artist_genre| %>
+								<%	genres += Genre.find(artist_genre.genre_id).name + ", " %>
+							<% end	%>
+							<%= genres %>
+						</div>
+				</div>
+			</div>
+			<% if artist.song %>
+			<div class="accordion-body collapse" id=<%="song#{index+1}"%> >
+				<div class="artist">
+					<div class="row">
+						<div class="span1 offset1">Song:</div>
+						<div class="span4">
+							<%= artist.song.name %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		<% end %>
 </div>
 
-<script src="//www.rdio.com/api/api.js?client_id=#{ENV['RDIO_CLIENT']}"></script>
+<script src="//www.rdio.com/api/api.js?helper=/helper.html&client_id=GioPadzhkfTNmOeI6dqi8Q"></script>

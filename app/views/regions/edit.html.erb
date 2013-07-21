@@ -1,0 +1,5 @@
+<%= simple_form_for @region do |f| %>
+  <%= f.input :name, placeholder: 'Name' %>
+  <%= f.input :image_link, placeholder: 'Url of a picture of the region' %>
+  <%= f.button :submit, class: "btn" %>
+<% end %>

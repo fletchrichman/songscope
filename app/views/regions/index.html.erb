@@ -1,7 +1,20 @@
-<div class="row">
-	<div class="span10 offset4">
-		<% @regions.each do |region| %>
-			<%= link_to region.name, region_path(region.id) %>
-		<% end %>
-	</div>
-</div>
+<ul class="thumbnails">
+	<% @regions.each_with_index do |region, index| %>
+  <li class="span3">
+    <div class="thumbnail">
+      <%= image_tag"#{region.image_link}" %>
+      <h3><%= index + 1 %>. <%= link_to region.name, region_path(region.id) %></h3>
+      <% if region.genre_overall %>
+      	<p><%= region.genre_overall.split(' ').map {|g| g.capitalize }.join(' ') %> </p>
+      <% end %>
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+Don't see your region here? 
+
+<%= form_tag regions_path do %>
+	<%= text_field_tag 'region', nil, :placeholder => 'Name of new region' %>
+<%= submit_tag "Create New Region", :class => 'btn' %>
+<% end %>

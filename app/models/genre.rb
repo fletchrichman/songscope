@@ -3,5 +3,5 @@ class Genre < ActiveRecord::Base
 
 	validates_uniqueness_of :name
 
-	belongs_to :artist
+	has_many :artist_genres
 end

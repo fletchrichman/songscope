@@ -4,19 +4,22 @@ class Artist < ActiveRecord::Base
 	validates_uniqueness_of :name
 
 	belongs_to :region
-	has_many :genres
+	has_many :artist_genres
 	has_one :song
 
 	def pull_songs
 		resp = self.GET_songs_hot
-		song = resp.parsed_response["response"]["songs"].first
-		s = Song.find_or_create_by_name(song["title"])
-		s.hotness = song["song_hotttnesss"]
-		rdio_id_string = song["tracks"].first["foreign_id"]
-		rdio_id_string.slice!("rdio-US:track:")
-		s.rdio_id = rdio_id_string
-		s.artist_id = self.id
-		s.save
+		if resp.parsed_response["response"]["songs"]
+			if song = resp.parsed_response["response"]["songs"].first
+				s = Song.find_or_create_by_name(song["title"])
+				s.hotness = song["song_hotttnesss"]
+				rdio_id_string = song["tracks"].first["foreign_id"]
+				rdio_id_string.slice!("rdio-US:track:")
+				s.rdio_id = rdio_id_string
+				s.artist_id = self.id
+				s.save
+			end
+		end
 	end
 
 	def GET_songs_hot
